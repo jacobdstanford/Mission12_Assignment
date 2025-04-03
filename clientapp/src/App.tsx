@@ -1,12 +1,23 @@
 import React from 'react';
-import BookList from './BookList'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import BookList from './BookList';
+import CartPage from './CartPage';
+import { CartProvider } from './CartContext';
+import NavBar from './Navbar';
 
 function App() {
   return (
-    <div className="container mt-4">
-      <h1 className="mb-4">Professor Hilton's Online Bookstore</h1>
-      <BookList />
-    </div>
+    <CartProvider>
+      <Router>
+        <NavBar />
+        <div className="container mt-4">
+          <Routes>
+            <Route path="/" element={<BookList />} />
+            <Route path="/cart" element={<CartPage />} />
+          </Routes>
+        </div>
+      </Router>
+    </CartProvider>
   );
 }
 
